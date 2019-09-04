@@ -8,7 +8,7 @@ vertex *initialize_vertex(char name, unsigned int num_of_neighbors)
 	n->name = name;
 	n->neighbors = calloc(num_of_neighbors, sizeof(n));
 	n->weights = calloc(num_of_neighbors, sizeof(unsigned int));
-	n->parent = calloc(1, sizeof(vertex));
+	n->parent = NULL;
 	n->distance_from_start = 0 - 1;
 
 	return n;

@@ -2,11 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-linked_node *initialize_linked_node(vertex *v);
+linked_node *initialize_linked_node(char name);
 
-void add_to_head(linked_list *list, vertex *v)
+void add_to_head(linked_list *list, char name)
 {
-	linked_node *ln = initialize_linked_node(v);
+	linked_node *ln = initialize_linked_node(name);
 
 	if (list->size == 0)
 	{
@@ -26,11 +26,9 @@ void add_to_head(linked_list *list, vertex *v)
 	list->size++;
 }
 
-void add_to_tail(linked_list *list, vertex *v)
+void add_to_tail(linked_list *list, char name)
 {
-	printf("Before add_to_tail: ");
-	print_list(list);
-	linked_node *ln = initialize_linked_node(v);
+	linked_node *ln = initialize_linked_node(name);
 
 	if (list->size == 0)
 	{
@@ -48,16 +46,14 @@ void add_to_tail(linked_list *list, vertex *v)
 	}
 
 	list->size++;
-	printf("After add_to_tail: ");
-	print_list(list);
 }
 
-void replace_head(linked_list *list, vertex *v)
+void replace_head(linked_list *list, char name)
 {
 	if (list->size == 0)
 		return;
 
-	linked_node *ln = initialize_linked_node(v);
+	linked_node *ln = initialize_linked_node(name);
 
 	linked_node *curr_head = list->head;
 
@@ -68,12 +64,12 @@ void replace_head(linked_list *list, vertex *v)
 	free(curr_head);
 }
 
-void replace_tail(linked_list *list, vertex *v)
+void replace_tail(linked_list *list, char name)
 {
 	if (list->size == 0)
 		return;
 
-	linked_node *ln = initialize_linked_node(v);
+	linked_node *ln = initialize_linked_node(name);
 
 	linked_node *curr_tail = list->tail;
 
@@ -89,16 +85,16 @@ int contains(linked_list *list, char name)
 	linked_node *curr_node;
 
 	for (curr_node = list->head; curr_node != NULL; curr_node = curr_node->next)
-		if (curr_node->data->name == name)
+		if (curr_node->data == name)
 			return 1;
 
 	return 0;
 }
 
-linked_node *initialize_linked_node(vertex *v)
+linked_node *initialize_linked_node(char name)
 {
 	linked_node *ln = calloc(1, sizeof(linked_node));
-	ln->data = v;
+	ln->data = name;
 
 	return ln;
 }
@@ -116,9 +112,9 @@ void print_list(linked_list *list)
 
 	while (curr_node->next != NULL)
 	{
-		printf("%c -- ", curr_node->data->name);
+		printf("%c -- ", curr_node->data);
 		curr_node = curr_node->next;
 	}
 
-	printf("%c]\n", curr_node->data->name);
+	printf("%c]\n", curr_node->data);
 }

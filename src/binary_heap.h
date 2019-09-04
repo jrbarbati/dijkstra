@@ -14,7 +14,7 @@ binary_heap *initialize_heap();
 
 void push(binary_heap *bh, vertex *n);
 
-void pop(binary_heap *bh, vertex *n);
+vertex *pop(binary_heap *bh);
 
 void print_heap(binary_heap *bh);
 

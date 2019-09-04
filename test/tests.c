@@ -20,6 +20,7 @@ extern void test_linked_list_add_to_tail_multiple(void);
 extern void test_linked_list_replace_head(void);
 extern void test_linked_list_replace_tail(void);
 extern void test_linked_list_contains(void);
+extern void test_dijkstra_shortest_path_from_S_to_Z(void);
 
 void setUp(void) {}
 
@@ -49,6 +50,7 @@ int main()
 	RUN_TEST(test_linked_list_replace_head);
 	RUN_TEST(test_linked_list_replace_tail);
 	RUN_TEST(test_linked_list_contains);
+	RUN_TEST(test_dijkstra_shortest_path_from_S_to_Z);
 
 	return UnityEnd();
 }

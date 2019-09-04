@@ -5,7 +5,7 @@
 
 linked_list *shortest_path(graph *graph, char starting_vertex_name, char ending_vertex_name)
 {
-	vertex *curr_vertex = calloc(1, sizeof(vertex));;
+	vertex *curr_vertex;
 	linked_list *visited = calloc(1, sizeof(linked_list));
 	binary_heap *priority_queue = initialize_heap();
 	
@@ -20,18 +20,12 @@ linked_list *shortest_path(graph *graph, char starting_vertex_name, char ending_
 
 	while (priority_queue->size != 0)
 	{
-		printf("Current Queue: ");
-		print_heap(priority_queue);
-
-		pop(priority_queue, curr_vertex);
+		curr_vertex = pop(priority_queue);
 
 		if (curr_vertex->name == ending_vertex_name)
 			break;
 
-		add_to_tail(visited, curr_vertex);
-
-		printf("Visited: ");
-		print_list(visited);
+		add_to_tail(visited, curr_vertex->name);
 
 		for (unsigned int i = 0; i < curr_vertex->num_of_neighbors; i++)
 		{
@@ -40,8 +34,6 @@ linked_list *shortest_path(graph *graph, char starting_vertex_name, char ending_
 
 			curr_vertex->neighbors[i]->parent = curr_vertex;
 			curr_vertex->neighbors[i]->distance_from_start = curr_vertex->distance_from_start + curr_vertex->weights[i];
-
-			printf("Adding %c to queue with parent %c\n", curr_vertex->neighbors[i]->name, curr_vertex->neighbors[i]->parent->name);
 
 			push(priority_queue, curr_vertex->neighbors[i]);
 		}
@@ -64,7 +56,7 @@ linked_list *build_path(vertex *end)
 
 	while (curr_vertex != NULL)
 	{
-		add_to_head(path, curr_vertex);
+		add_to_head(path, curr_vertex->name);
 		curr_vertex = curr_vertex->parent;
 	}
 

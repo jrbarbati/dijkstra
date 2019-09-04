@@ -139,33 +139,30 @@ void test_binary_heap_push_already_exists(void)
 
 void test_binary_heap_pop_empty(void)
 {
-	vertex *popped = calloc(1, sizeof(vertex));
 	binary_heap *bh = initialize_heap();
 
-	pop(bh, popped);
+	vertex *popped = pop(bh);
 
-	TEST_ASSERT_EQUAL_INT('\0', popped->name);
+	TEST_ASSERT_NULL(popped);
 
-	free(popped);
 	free(bh);
 }
 
 void test_binary_heap_pop(void)
 {	
-	vertex a = {'A', NULL, NULL, 1, NULL, 2};
-	vertex b = {'B', NULL, NULL, 2, NULL, 5};
-	vertex c = {'C', NULL, NULL, 3, NULL, 1};
-	vertex *popped = calloc(1, sizeof(vertex));
+	vertex a = {'A', NULL, NULL, 0, NULL, 2};
+	vertex b = {'B', NULL, NULL, 0, NULL, 5};
+	vertex c = {'C', NULL, NULL, 0, NULL, 1};
+	vertex *popped;
 	binary_heap *bh = initialize_heap();
 
 	push(bh, &a);
 	push(bh, &b);
 	push(bh, &c);
 
-	pop(bh, popped);
+	popped = pop(bh);
 
 	TEST_ASSERT_EQUAL_INT('C', popped->name);
-	TEST_ASSERT_EQUAL_INT(3, popped->num_of_neighbors);
 
 	TEST_ASSERT_EQUAL_INT(2, bh->size);
 
@@ -175,10 +172,9 @@ void test_binary_heap_pop(void)
 	TEST_ASSERT_EQUAL_INT('B', bh->vertices[2]->name);
 	TEST_ASSERT_EQUAL_INT(5, bh->vertices[2]->distance_from_start);
 
-	pop(bh, popped);
+	popped = pop(bh);
 
 	TEST_ASSERT_EQUAL_INT('A', popped->name);
-	TEST_ASSERT_EQUAL_INT(1, popped->num_of_neighbors);
 
 	TEST_ASSERT_EQUAL_INT(1, bh->size);
 		

@@ -22,19 +22,18 @@ void push(binary_heap *bh, vertex *n)
 	swim(bh);
 }
 
-void pop(binary_heap *bh, vertex *n)
+vertex *pop(binary_heap *bh)
 {
 	if (bh->size == 0)
-		return;
+		return NULL;
 
-	printf("Popping %c (%d) off heap\n", bh->vertices[1]->name, bh->vertices[1]->distance_from_start);
-	printf("Heap Before: ");
-	print_heap(bh);
+	vertex *n = calloc(1, sizeof(vertex));
 
 	n->name = bh->vertices[1]->name;
 	n->neighbors = bh->vertices[1]->neighbors;
 	n->weights = bh->vertices[1]->weights;
 	n->num_of_neighbors = bh->vertices[1]->num_of_neighbors;
+	n->parent = bh->vertices[1]->parent;
 	n->distance_from_start = bh->vertices[1]->distance_from_start;
 
 	swap(bh, 1, bh->size);
@@ -44,13 +43,13 @@ void pop(binary_heap *bh, vertex *n)
 
 	sink(bh);
 
-	printf("After Pop: ");
-	print_heap(bh);
+	return n;
 }
 
 void swim(binary_heap *bh)
 {
 	unsigned int k = bh->size;
+
 	while (k > 1 && bh->vertices[k / 2]->distance_from_start > bh->vertices[k]->distance_from_start)
 	{
 		swap(bh, k, k / 2);
