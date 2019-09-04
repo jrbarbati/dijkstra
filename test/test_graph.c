@@ -12,7 +12,7 @@ void test_graph_add_vertex(void)
 	add_vertex(g, &n);
 
 	TEST_ASSERT_EQUAL_INT(1, g->size);
-	TEST_ASSERT_EQUAL_INT(n.name, g->vertices[0].name);
+	TEST_ASSERT_EQUAL_INT(n.name, g->vertices[0]->name);
 
 	free(g->vertices);
 	free(g);
@@ -36,10 +36,10 @@ void test_graph_get_vertex_with_name(void)
 	add_vertex(g, b);
 	add_vertex(g, c);
 
-	vertex wanted = get_vertex_with_name(g, 'B');
+	vertex *wanted = get_vertex_with_name(g, 'B');
 
-	TEST_ASSERT_EQUAL_INT('B', wanted.name);
-	TEST_ASSERT_EQUAL_INT(2, wanted.num_of_neighbors);
+	TEST_ASSERT_EQUAL_INT('B', wanted->name);
+	TEST_ASSERT_EQUAL_INT(2, wanted->num_of_neighbors);
 
 	free(a);
 	free(b);

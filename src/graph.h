@@ -9,13 +9,13 @@
 
 typedef struct graph
 {
-    vertex *vertices;
+    vertex **vertices;
     unsigned int size;
 } graph;
 
 void add_vertex(graph *g, vertex *n);
 
-vertex get_vertex_with_name(graph *g, char name);
+vertex *get_vertex_with_name(graph *g, char name);
 
 void print_graph(graph *g);
 

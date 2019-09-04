@@ -5,7 +5,7 @@
 
 typedef struct linked_node
 {
-	vertex data;
+	vertex *data;
 	struct linked_node *next;
 	struct linked_node *prev;
 } linked_node;
@@ -17,11 +17,16 @@ typedef struct linked_list
 	int size;
 } linked_list;
 
-void add_to_head(linked_list *list, vertex *n);
-void add_to_tail(linked_list *list, vertex *n);
-void replace_head(linked_list *list, vertex *n);
-void replace_tail(linked_list *list, vertex *n);
+void add_to_head(linked_list *list, vertex *v);
+
+void add_to_tail(linked_list *list, vertex *v);
+
+void replace_head(linked_list *list, vertex *v);
+
+void replace_tail(linked_list *list, vertex *v);
+
 int contains(linked_list *list, char name);
+
 void print_list(linked_list *list);
 
 #endif

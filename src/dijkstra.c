@@ -5,17 +5,24 @@
 
 linked_list *shortest_path(graph *graph, char starting_vertex_name, char ending_vertex_name)
 {
-	vertex *curr_vertex = calloc(1, sizeof(vertex));
+	vertex *curr_vertex = calloc(1, sizeof(vertex));;
 	linked_list *visited = calloc(1, sizeof(linked_list));
 	binary_heap *priority_queue = initialize_heap();
 	
-	vertex start = get_vertex_with_name(graph, starting_vertex_name);
-	start.distance_from_start = 0;
+	vertex *start = get_vertex_with_name(graph, starting_vertex_name);
 
-	push(priority_queue, &start);
+	if (!start)
+		return NULL;
+
+	start->distance_from_start = 0;
+
+	push(priority_queue, start);
 
 	while (priority_queue->size != 0)
 	{
+		printf("Current Queue: ");
+		print_heap(priority_queue);
+
 		pop(priority_queue, curr_vertex);
 
 		if (curr_vertex->name == ending_vertex_name)
@@ -23,30 +30,20 @@ linked_list *shortest_path(graph *graph, char starting_vertex_name, char ending_
 
 		add_to_tail(visited, curr_vertex);
 
+		printf("Visited: ");
+		print_list(visited);
+
 		for (unsigned int i = 0; i < curr_vertex->num_of_neighbors; i++)
 		{
-			if (contains(visited, curr_vertex->neighbors[i].name))
+			if (contains(visited, curr_vertex->neighbors[i]->name))
 				continue;
 
-			vertex parent = {
-				curr_vertex->name, 
-				curr_vertex->neighbors, 
-				curr_vertex->weights, 
-				curr_vertex->num_of_neighbors, 
-				curr_vertex->parent, 
-				curr_vertex->distance_from_start
-			};
+			curr_vertex->neighbors[i]->parent = curr_vertex;
+			curr_vertex->neighbors[i]->distance_from_start = curr_vertex->distance_from_start + curr_vertex->weights[i];
 
-			vertex next = {
-				curr_vertex->neighbors[i].name, 
-				curr_vertex->neighbors[i].neighbors, 
-				curr_vertex->neighbors[i].weights,
-				curr_vertex->neighbors[i].num_of_neighbors,
-				&parent,
-				curr_vertex->distance_from_start + curr_vertex->weights[i]
-			};
+			printf("Adding %c to queue with parent %c\n", curr_vertex->neighbors[i]->name, curr_vertex->neighbors[i]->parent->name);
 
-			push(priority_queue, &next);
+			push(priority_queue, curr_vertex->neighbors[i]);
 		}
 	}
 
@@ -55,6 +52,7 @@ linked_list *shortest_path(graph *graph, char starting_vertex_name, char ending_
 	free(visited);
 	free(priority_queue);
 	free(curr_vertex);
+	free(start);
 
 	return path;
 }

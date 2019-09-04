@@ -4,7 +4,7 @@
 typedef struct vertex 
 {
 	char name;
-	struct vertex *neighbors;
+	struct vertex **neighbors;
 	unsigned int *weights;
 	unsigned int num_of_neighbors;
 	struct vertex *parent;
@@ -15,7 +15,5 @@ typedef struct vertex
 vertex *initialize_vertex(char name, unsigned int num_of_neighbors);
 
 void add_edge(vertex *source, vertex *target, unsigned int weight);
-
-void set_parent(vertex *child, vertex *parent);
 
 #endif //DIJKSTRA_VERTEX_H

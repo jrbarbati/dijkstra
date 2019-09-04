@@ -22,7 +22,7 @@ void test_vertex_add_edge(void)
 	add_edge(source, target, 10);
 
 	TEST_ASSERT_EQUAL_INT(1, source->num_of_neighbors);
-	TEST_ASSERT_EQUAL_INT(target->name, source->neighbors[0].name);
+	TEST_ASSERT_EQUAL_INT(target->name, source->neighbors[0]->name);
 	TEST_ASSERT_EQUAL_INT(10, source->weights[0]);
 
 	free(source->neighbors);
@@ -33,23 +33,4 @@ void test_vertex_add_edge(void)
 	free(target->weights);
 	free(target->parent);
 	free(target);
-}
-
-void test_vertex_parent_relationship(void)
-{
-	vertex *child = initialize_vertex('A', 1);
-	vertex *parent = initialize_vertex('B', 1);
-
-	set_parent(child, parent);
-
-	TEST_ASSERT_EQUAL_INT('B', child->parent->name);
-
-	free(child->neighbors);
-	free(child->weights);
-	free(child->parent);
-	free(child);
-	free(parent->neighbors);
-	free(parent->weights);
-	free(parent->parent);
-	free(parent);
 }

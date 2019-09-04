@@ -28,6 +28,8 @@ void add_to_head(linked_list *list, vertex *v)
 
 void add_to_tail(linked_list *list, vertex *v)
 {
+	printf("Before add_to_tail: ");
+	print_list(list);
 	linked_node *ln = initialize_linked_node(v);
 
 	if (list->size == 0)
@@ -46,6 +48,8 @@ void add_to_tail(linked_list *list, vertex *v)
 	}
 
 	list->size++;
+	printf("After add_to_tail: ");
+	print_list(list);
 }
 
 void replace_head(linked_list *list, vertex *v)
@@ -85,7 +89,7 @@ int contains(linked_list *list, char name)
 	linked_node *curr_node;
 
 	for (curr_node = list->head; curr_node != NULL; curr_node = curr_node->next)
-		if (curr_node->data.name == name)
+		if (curr_node->data->name == name)
 			return 1;
 
 	return 0;
@@ -94,7 +98,7 @@ int contains(linked_list *list, char name)
 linked_node *initialize_linked_node(vertex *v)
 {
 	linked_node *ln = calloc(1, sizeof(linked_node));
-	ln->data = *v;
+	ln->data = v;
 
 	return ln;
 }
@@ -112,9 +116,9 @@ void print_list(linked_list *list)
 
 	while (curr_node->next != NULL)
 	{
-		printf("%c -- ", curr_node->data.name);
+		printf("%c -- ", curr_node->data->name);
 		curr_node = curr_node->next;
 	}
 
-	printf("%c]\n", curr_node->data.name);
+	printf("%c]\n", curr_node->data->name);
 }

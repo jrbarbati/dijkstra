@@ -10,18 +10,20 @@ void test_dijkstra_shortest_path(void)
 	graph *g = create_graph();
 	linked_list *path = shortest_path(g, 'A', 'C');
 
+	TEST_ASSERT_NOT_NULL(path);
+
 	print_path(path);
 
 	TEST_ASSERT_EQUAL_INT(3, path->size);
-	TEST_ASSERT_EQUAL_INT('A', path->head->data.name);
-	TEST_ASSERT_EQUAL_INT('B', path->head->next->data.name);
-	TEST_ASSERT_EQUAL_INT('C', path->head->next->next->data.name);
+	TEST_ASSERT_EQUAL_INT('A', path->head->data->name);
+	TEST_ASSERT_EQUAL_INT('B', path->head->next->data->name);
+	TEST_ASSERT_EQUAL_INT('C', path->head->next->next->data->name);
 
 	for (unsigned int i = 0; i < g->size; i++)
 	{
-		free(g->vertices[i].neighbors);
-		free(g->vertices[i].weights);
-		free(g->vertices[i].parent);
+		free(g->vertices[i]->neighbors);
+		free(g->vertices[i]->weights);
+		free(g->vertices[i]->parent);
 	}
 
 	free(g->vertices);
@@ -40,10 +42,10 @@ void test_dijstra_build_path(void)
 	linked_list *path = build_path(&c);
 
 	TEST_ASSERT_EQUAL_INT(4, path->size);
-	TEST_ASSERT_EQUAL_INT('S', path->head->data.name);
-	TEST_ASSERT_EQUAL_INT('A', path->head->next->data.name);
-	TEST_ASSERT_EQUAL_INT('B', path->head->next->next->data.name);
-	TEST_ASSERT_EQUAL_INT('C', path->head->next->next->next->data.name);
+	TEST_ASSERT_EQUAL_INT('S', path->head->data->name);
+	TEST_ASSERT_EQUAL_INT('A', path->head->next->data->name);
+	TEST_ASSERT_EQUAL_INT('B', path->head->next->next->data->name);
+	TEST_ASSERT_EQUAL_INT('C', path->head->next->next->next->data->name);
 
 	free(path);
 }
@@ -143,9 +145,9 @@ void print_path(linked_list *path)
 
 	while (curr_node->next != NULL)
 	{
-		printf("%c -> ", curr_node->data.name);
+		printf("%c -> ", curr_node->data->name);
 		curr_node = curr_node->next;
 	}
 
-	printf("%c\n", curr_node->data.name);
+	printf("%c\n", curr_node->data->name);
 }

@@ -2,7 +2,6 @@
 
 extern void test_vertex_initialize_vertex(void);
 extern void test_vertex_add_edge(void);
-extern void test_vertex_parent_relationship(void);
 extern void test_graph_add_vertex(void);
 extern void test_graph_get_vertex_with_name(void);
 extern void test_dijkstra_shortest_path(void);
@@ -32,7 +31,6 @@ int main()
 
 	RUN_TEST(test_vertex_initialize_vertex);
 	RUN_TEST(test_vertex_add_edge);
-	RUN_TEST(test_vertex_parent_relationship);
 	RUN_TEST(test_graph_add_vertex);
 	RUN_TEST(test_graph_get_vertex_with_name);
 	RUN_TEST(test_dijkstra_shortest_path);
