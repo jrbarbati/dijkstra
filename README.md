@@ -1,4 +1,4 @@
-`git clone https://github.com/jrbarbat/dijkstra`
+`git clone https://github.com/jrbarbati/dijkstra`
 
 `cd dijkstra`
 
