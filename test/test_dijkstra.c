@@ -5,7 +5,7 @@
 graph *create_graph();
 void print_path(linked_list *path);
 
-void test_dijkstra_shortest_path(void)
+void test_dijkstra_shortest_path_A_to_C(void)
 {
 	graph *g = create_graph();
 	linked_list *path = shortest_path(g, 'A', 'C');
@@ -18,12 +18,68 @@ void test_dijkstra_shortest_path(void)
 	TEST_ASSERT_EQUAL_INT('C', path->head->next->next->data);
 }
 
+void test_dijkstra_shortest_path_S_to_M(void)
+{
+	graph *g = create_graph();
+	linked_list *path = shortest_path(g, 'S', 'M');
+
+	TEST_ASSERT_NOT_NULL(path);
+
+	TEST_ASSERT_EQUAL_INT(4, path->size);
+	TEST_ASSERT_EQUAL_INT('S', path->head->data);
+	TEST_ASSERT_EQUAL_INT('B', path->head->next->data);
+	TEST_ASSERT_EQUAL_INT('C', path->head->next->next->data);
+	TEST_ASSERT_EQUAL_INT('M', path->head->next->next->next->data);
+}
+
+void test_dijkstra_shortest_path_S_to_J(void)
+{
+	graph *g = create_graph();
+	linked_list *path = shortest_path(g, 'S', 'J');
+
+	TEST_ASSERT_NOT_NULL(path);
+
+	TEST_ASSERT_EQUAL_INT(4, path->size);
+	TEST_ASSERT_EQUAL_INT('S', path->head->data);
+	TEST_ASSERT_EQUAL_INT('A', path->head->next->data);
+	TEST_ASSERT_EQUAL_INT('E', path->head->next->next->data);
+	TEST_ASSERT_EQUAL_INT('J', path->head->next->next->next->data);
+}
+
+void test_dijkstra_shortest_path_N_to_G(void)
+{
+	graph *g = create_graph();
+	linked_list *path = shortest_path(g, 'N', 'G');
+
+	TEST_ASSERT_NOT_NULL(path);
+
+	TEST_ASSERT_EQUAL_INT(10, path->size);
+	TEST_ASSERT_EQUAL_INT('N', path->head->data);
+	TEST_ASSERT_EQUAL_INT('L', path->head->next->data);
+	TEST_ASSERT_EQUAL_INT('M', path->head->next->next->data);
+	TEST_ASSERT_EQUAL_INT('C', path->head->next->next->next->data);
+	TEST_ASSERT_EQUAL_INT('B', path->head->next->next->next->next->data);
+	TEST_ASSERT_EQUAL_INT('A', path->head->next->next->next->next->next->data);
+	TEST_ASSERT_EQUAL_INT('E', path->head->next->next->next->next->next->next->data);
+	TEST_ASSERT_EQUAL_INT('H', path->head->next->next->next->next->next->next->next->data);
+	TEST_ASSERT_EQUAL_INT('F', path->head->next->next->next->next->next->next->next->next->data);
+	TEST_ASSERT_EQUAL_INT('G', path->head->next->next->next->next->next->next->next->next->next->data);
+}
+
 void test_dijkstra_shortest_path_from_S_to_Z(void)
 {
 	graph *g = create_graph();
 	linked_list *path = shortest_path(g, 'S', 'Z');
 
-	print_path(path);
+	TEST_ASSERT_NOT_NULL(path)
+
+	TEST_ASSERT_EQUAL_INT(5, path->size);
+	TEST_ASSERT_EQUAL_INT('S', path->head->data);
+	TEST_ASSERT_EQUAL_INT('A', path->head->next->data);
+	TEST_ASSERT_EQUAL_INT('E', path->head->next->next->data);
+	TEST_ASSERT_EQUAL_INT('K', path->head->next->next->next->data);
+	TEST_ASSERT_EQUAL_INT('Z', path->head->next->next->next->next->data);
+
 }
 
 void test_dijstra_build_path(void)

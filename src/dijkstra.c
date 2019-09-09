@@ -32,6 +32,9 @@ linked_list *shortest_path(graph *graph, char starting_vertex_name, char ending_
 			if (contains(visited, curr_vertex->neighbors[i]->name))
 				continue;
 
+			if (find_vertex(priority_queue, curr_vertex->neighbors[i]->name, curr_vertex->distance_from_start + curr_vertex->weights[i]) == -2)
+				continue;
+
 			curr_vertex->neighbors[i]->parent = curr_vertex;
 			curr_vertex->neighbors[i]->distance_from_start = curr_vertex->distance_from_start + curr_vertex->weights[i];
 

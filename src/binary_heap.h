@@ -18,5 +18,6 @@ vertex *pop(binary_heap *bh);
 
 void print_heap(binary_heap *bh);
 
+int find_vertex(binary_heap *bh, char name, unsigned int priority);\
 
 #endif

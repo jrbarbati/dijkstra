@@ -85,58 +85,6 @@ void test_binary_heap_push_multiple_duplicate_priority_values(void)
 	free(bh);
 }
 
-void test_binary_heap_push_already_exists(void)
-{
-	vertex a = {'A', NULL, NULL, 0, NULL, 2};
-	vertex b = {'B', NULL, NULL, 0, NULL, 5};
-	vertex c = {'C', NULL, NULL, 0, NULL, 1};
-	vertex d = {'D', NULL, NULL, 0, NULL, 4};
-	vertex b_dup = {'B', NULL, NULL, 0, NULL, 3};
-	binary_heap *bh = initialize_heap();
-
-	push(bh, &a);
-	push(bh, &b);
-	push(bh, &c);
-	push(bh, &d);
-
-	TEST_ASSERT_EQUAL_INT(4, bh->size);
-
-	TEST_ASSERT_EQUAL_INT('C', bh->vertices[1]->name);
-	TEST_ASSERT_EQUAL_INT(1, bh->vertices[1]->distance_from_start);
-
-	TEST_ASSERT_EQUAL_INT('D', bh->vertices[2]->name);
-	TEST_ASSERT_EQUAL_INT(4, bh->vertices[2]->distance_from_start);
-
-	TEST_ASSERT_EQUAL_INT('A', bh->vertices[3]->name);
-	TEST_ASSERT_EQUAL_INT(2, bh->vertices[3]->distance_from_start);
-
-	TEST_ASSERT_EQUAL_INT('B', bh->vertices[4]->name);
-	TEST_ASSERT_EQUAL_INT(5, bh->vertices[4]->distance_from_start);
-
-
-	push(bh, &b_dup);
-
-	TEST_ASSERT_EQUAL_INT(5, bh->size);
-
-	TEST_ASSERT_EQUAL_INT('C', bh->vertices[1]->name);
-	TEST_ASSERT_EQUAL_INT(1, bh->vertices[1]->distance_from_start);
-
-	TEST_ASSERT_EQUAL_INT('B', bh->vertices[2]->name);
-	TEST_ASSERT_EQUAL_INT(3, bh->vertices[2]->distance_from_start);
-
-	TEST_ASSERT_EQUAL_INT('A', bh->vertices[3]->name);
-	TEST_ASSERT_EQUAL_INT(2, bh->vertices[3]->distance_from_start);
-
-	TEST_ASSERT_EQUAL_INT('B', bh->vertices[4]->name);
-	TEST_ASSERT_EQUAL_INT(5, bh->vertices[4]->distance_from_start);
-
-	TEST_ASSERT_EQUAL_INT('D', bh->vertices[5]->name);
-	TEST_ASSERT_EQUAL_INT(4, bh->vertices[5]->distance_from_start);
-
-
-	free(bh);
-}
-
 void test_binary_heap_pop_empty(void)
 {
 	binary_heap *bh = initialize_heap();
