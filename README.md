@@ -1,6 +1,8 @@
 # Dijkstra's Shortest Path
 
-A C implementation of Dijkstra's shortest path algorithm using a min binary heap as the priority queue. The graph is represented as an adjacency list with weighted, directed edges.
+A C implementation of Dijkstra's shortest path algorithm, written as a learning exercise in both C and graph algorithms. The goal was to implement Dijkstra's algorithm from scratch while also manually implementing every data structure it requires — no standard library containers, no third-party collections. That means the min binary heap used as the priority queue, the doubly linked list used for the visited set and path reconstruction, and the graph and vertex structures are all hand-rolled as part of the exercise.
+
+The graph is represented as an adjacency list with weighted, directed edges.
 
 ## Project Structure
 
