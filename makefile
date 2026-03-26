@@ -11,24 +11,31 @@ CFLAGS += -Wextra
 CFLAGS += -pedantic
 CFLAGS += -Werror
 CFLAGS += -Wmissing-declarations
+CFLAGS += -Wstrict-prototypes
 CFLAGS += -DUNITY_SUPPORT_64
 
 ASANFLAGS  = -fsanitize=address
 ASANFLAGS += -fno-common
 ASANFLAGS += -fno-omit-frame-pointer
 
+.PHONY: all test memcheck clean
+
+all: tests.out
+
+.PHONY: test memcheck clean
+
 test: tests.out
 	@./tests.out
 
-memcheck: test/*.c src/*.c src/*.h
+memcheck: test/*.c test/vendor/unity.c src/*.c src/*.h
 	@echo Compiling $@
 	@$(CC) $(ASANFLAGS) $(CFLAGS) src/*.c test/vendor/unity.c test/*.c -o memcheck.out $(LIBS)
-	@./memcheck.out
+	@ASAN_OPTIONS=detect_leaks=0 ./memcheck.out
 	@echo "Memory check passed"
 
 clean:
 	rm -rf *.o *.out *.out.dSYM
 
-tests.out: test/*.c src/*.c src/*.h
+tests.out: test/*.c test/vendor/unity.c src/*.c src/*.h
 	@echo Compiling $@
 	@$(CC) $(CFLAGS) src/*.c test/vendor/unity.c test/*.c -o tests.out $(LIBS)

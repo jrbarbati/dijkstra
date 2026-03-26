@@ -2,7 +2,7 @@
 #include "../src/dijkstra.h"
 #include <stdlib.h>
 
-graph *create_graph();
+graph *create_graph(void);
 void print_path(linked_list *path);
 
 void test_dijkstra_shortest_path_A_to_C(void)
@@ -82,7 +82,7 @@ void test_dijkstra_shortest_path_from_S_to_Z(void)
 
 }
 
-void test_dijstra_build_path(void)
+void test_dijkstra_build_path(void)
 {
 	vertex start = {'S', NULL, NULL, 0, NULL, 0};
 	vertex a = {'A', NULL, NULL, 0, &start, 1};
@@ -98,7 +98,7 @@ void test_dijstra_build_path(void)
 	TEST_ASSERT_EQUAL_INT('C', path->head->next->next->next->data);
 }
 
-graph *create_graph()
+graph *create_graph(void)
 {
 	graph *g = calloc(1, sizeof(graph));
 	g->vertices = calloc(MAX_NUM_OF_VERTICES, sizeof(vertex));

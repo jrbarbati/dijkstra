@@ -6,7 +6,7 @@ void swim(binary_heap *bh);
 void sink(binary_heap *bh);
 void swap(binary_heap *bh, int index1, int index2);
 	
-binary_heap *initialize_heap()
+binary_heap *initialize_heap(void)
 {
 	binary_heap *heap = calloc(1, sizeof(binary_heap));
 

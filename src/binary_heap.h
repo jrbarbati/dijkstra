@@ -10,7 +10,7 @@ typedef struct binary_heap
 	unsigned int size;
 } binary_heap;
 
-binary_heap *initialize_heap();
+binary_heap *initialize_heap(void);
 
 void push(binary_heap *bh, vertex *n);
 

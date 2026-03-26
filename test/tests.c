@@ -9,7 +9,7 @@ extern void test_dijkstra_shortest_path_S_to_M(void);
 extern void test_dijkstra_shortest_path_S_to_J(void);
 extern void test_dijkstra_shortest_path_N_to_G(void);
 extern void test_dijkstra_shortest_path_from_S_to_Z(void);
-extern void test_dijstra_build_path(void);
+extern void test_dijkstra_build_path(void);
 extern void test_binary_heap_initialize_heap(void);
 extern void test_binary_heap_push(void);
 extern void test_binary_heap_push_multiple(void);
@@ -28,7 +28,7 @@ void setUp(void) {}
 
 void tearDown(void) {}
 
-int main()
+int main(void)
 {
 	UnityBegin("test/tests.c");
 
@@ -41,7 +41,7 @@ int main()
 	RUN_TEST(test_dijkstra_shortest_path_S_to_J);
 	RUN_TEST(test_dijkstra_shortest_path_N_to_G);
 	RUN_TEST(test_dijkstra_shortest_path_from_S_to_Z);
-	RUN_TEST(test_dijstra_build_path);
+	RUN_TEST(test_dijkstra_build_path);
 	RUN_TEST(test_binary_heap_initialize_heap);
 	RUN_TEST(test_binary_heap_push);
 	RUN_TEST(test_binary_heap_push_multiple);
